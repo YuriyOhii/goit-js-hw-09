@@ -14,6 +14,7 @@ const dateRef = {
 };
 let periodOfTime = 0;
 let timerId = null;
+let timerValue = 0;
 
 refs.button.disabled = true;
 
@@ -40,7 +41,6 @@ function openedCalendar() {
 
 function actsOnChoosenDate(selDate) {
   periodOfTime = Date.parse(selDate[0]);
-  let timerValue = 0;
 
   if (periodOfTime - new Date().getTime() > 100000) {
     refs.button.disabled = false;
@@ -66,10 +66,7 @@ function calculateAndDisplay() {
   timerValue -= 1000;
 }
 
-const addLeadingZero = value =>
-    String(value).padStart(2,'0');
-
-
+const addLeadingZero = value => String(value).padStart(2, '0');
 
 function displayTime(value) {
   dateRef.days.textContent = addLeadingZero(value.days);
