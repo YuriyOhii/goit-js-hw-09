@@ -16,3 +16,26 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.field {
+  width: 200px;
+  height: 150px;
+
+  background-color: #000;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 10px;
+}
+span {
+  display: block;
+}
