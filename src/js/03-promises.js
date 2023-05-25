@@ -12,6 +12,7 @@ function onFormSubmit(e) {
     stepDelay: step.valueAsNumber,
     amount: amount.valueAsNumber,
   };
+  if (value.firstDelay < 0 || value.stepDelay < 0 || value.amount <= 0) return Notify.failure(`Put the correct values`);
   makePluralPromises(value);
 }
 
@@ -34,12 +35,14 @@ function createPromise(position, delay) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(position, delay);
+        resolve({position, delay});
       } else {
-        reject(position, delay);
+        reject({position, delay});
       }
     }, delay);
   });
+  
   return promise;
+
 }
 

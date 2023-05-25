@@ -5,6 +5,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 const refs = {
   input: document.getElementById('datetime-picker'),
   button: document.querySelector('[data-start]'),
+  reset: document.querySelector('[data-reset]'),
 };
 const dateRef = {
   days: document.querySelector('[data-days]'),
@@ -42,7 +43,7 @@ function openedCalendar() {
 function actsOnChoosenDate(selDate) {
   periodOfTime = Date.parse(selDate[0]);
 
-  if (periodOfTime - new Date().getTime() > 100000) {
+  if (periodOfTime - new Date().getTime() > 30000) {
     refs.button.disabled = false;
     refs.button.addEventListener('click', onStartBtnClick, { once: true });
   } else {
@@ -56,8 +57,15 @@ function makeFirstTimerValue() {
 }
 
 function onStartBtnClick() {
+  refs.input.disabled = true;
+  refs.reset.addEventListener('click', onResetBtnClick);
   makeFirstTimerValue();
   timerId = setInterval(calculateAndDisplay, 1000);
+}
+
+function onResetBtnClick() {
+  refs.input.disabled = false;
+  openedCalendar();
 }
 
 function calculateAndDisplay() {
@@ -70,9 +78,9 @@ const addLeadingZero = value => String(value).padStart(2, '0');
 
 function displayTime(value) {
   dateRef.days.textContent = addLeadingZero(value.days);
-  dateRef.hours.textContent = value.hours;
-  dateRef.minutes.textContent = value.minutes;
-  dateRef.seconds.textContent = value.seconds;
+  dateRef.hours.textContent = addLeadingZero(value.hours);
+  dateRef.minutes.textContent = addLeadingZero(value.minutes);
+  dateRef.seconds.textContent = addLeadingZero(value.seconds);
 }
 
 function convertMs(ms) {

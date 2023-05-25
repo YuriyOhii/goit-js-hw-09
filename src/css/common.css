@@ -39,3 +39,6 @@ img {
 span {
   display: block;
 }
+button {
+  cursor: pointer;
+}
